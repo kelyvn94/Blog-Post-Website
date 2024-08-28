@@ -1,4 +1,5 @@
 import { useState } from "react";
+import BlogList from "./BlogList";
 const Homepage = () => {
     const [blogs, setBlogs] = useState([
         {title: 'The power of Node.js', body: 'Node.js empowers developers to build scalable, high-performance web applications with JavaScript, enabling efficient server-side scripting and real-time communication.', author: 'Kelvin', id:1},
@@ -7,14 +8,13 @@ const Homepage = () => {
 
     ]);
     
+    const handleDelete = (id) => {
+        const newBlogs = (blogs.filter(blog => blog.id !== id));
+        setBlogs(newBlogs);
+    }
     return ( 
         <div class= "homepage">
-           {blogs.map((blog) => (
-            <div className="blog-preview" key={blog.id}>
-            <h2>{ blog.title }</h2>
-            <p>Written by { blog.author }</p>
-            </div>
-           ))}
+           <BlogList blogs = {blogs} handleDelete = {handleDelete}/>
         </div>
      );
 }
